@@ -1,0 +1,12 @@
+body {
+        background-color: chocolate;
+    }
+
+    .menu-item {
+        margin: 5px;
+        color: crimson;
+        text-decoration: none;
+        background-color: black;
+        padding: 5px;
+        border-radius:  5px;
+    }
