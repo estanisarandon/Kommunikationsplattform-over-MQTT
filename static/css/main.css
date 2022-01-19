@@ -1,0 +1,14 @@
+body {
+        max-width: 600px;
+        margin: auto;
+        background-color: teal;
+    }
+
+    .menu-item {
+        margin: 5px;
+        color: crimson;
+        text-decoration: none;
+        background-color: black;
+        padding: 5px;
+        border-radius:  5px;
+    }
