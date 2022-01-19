@@ -1,17 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" href="/static/css/main.css"/>
     <meta charset="UTF-8">
     <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}" />
+
 </head>
 <body>
-<a class="menu-item" href="/">Home</a>
-<a class="menu-item" href="/user">User</a>
-<hr />
-{% block content %}
-{% endblock %}
-{% block scripts %}
-{% endblock %}
+    <a class="menu-item" href="{{ url_for('bp_open.index') }}">
+        Home
+    </a>
+    <a class="menu-item" href="{{ url_for('bp_user.user_get') }}">
+        User
+    </a>
+    <a class="menu-item" href="{{ url_for('bp_open.signup_get') }}">
+        Sign Up
+    </a>
+    <hr />
+    {% block content %}
+    {% endblock %}
+
+    {% block scripts %}
+    {% endblock %}
 </body>
 </html>

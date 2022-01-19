@@ -1,5 +1,7 @@
 body {
-        background-color: chocolate;
+        max-width: 600px;
+        margin: auto;
+        background-color: teal;
     }
 
     .menu-item {
