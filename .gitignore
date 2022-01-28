@@ -1,1 +1,4 @@
-/.idea
+venv/
+.idea/
+__pycache__/
+# .env -> this file should be included in the final version, since contains the API key which should not be publish
