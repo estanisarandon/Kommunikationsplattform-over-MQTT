@@ -1,0 +1,16 @@
+{% extends "base-template.html" %}
+
+{% block title %}
+    Chat page
+{% endblock %}
+
+{% block content %}
+    <body>
+    <h1>Chat</h1>
+    <p>Communication platform</p>
+    <br />
+    <br />
+    <p>Your ip is {{ ip }}</p>
+    <p> You want to chat with {{ chat_user.name }}</p>
+    </body>
+{% endblock %}

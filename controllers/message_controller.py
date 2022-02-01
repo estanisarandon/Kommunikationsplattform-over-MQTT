@@ -16,3 +16,8 @@ def create_message(body, receiver_id):
 
 def get_user_messages():
     return current_user.recv_messages
+
+
+def message_alert():
+    name = bp_user.message_get(user_id)
+    return message.sender.name

@@ -45,3 +45,11 @@ def mailbox_get():
     messages = get_user_messages()
     users = get_all_but_current_users()
     return render_template('mailbox.html', messages=messages, users=users)
+
+
+@bp_user.get('/chat/<user_id>')
+def chat_get(user_id):
+    chat_server_ip = request.remote_addr
+    user_id = int(user_id)
+    chat_with = get_user_by_id(user_id)
+    render_template('chat.html', ip=chat_server_ip, chat_user=chat_with)

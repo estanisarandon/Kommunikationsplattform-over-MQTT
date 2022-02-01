@@ -5,7 +5,37 @@
 {% endblock %}
 
 {% block content %}
+    <script>
+        function alertMessage() {
+            alert("Are you sure?");
+        }
+    </script>
+
     <h1 id="main-heading">User Page</h1>
     <p>Hello {{ current_user.name }}</p>
     <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    {% if current_user.admin %}
+        </table>
+        <table class="center">
+            <tr>
+                <th>Name</th>
+            </tr>
+            {% for user in users %}
+                <tr>
+                    <td><a>{{ user.name }}</a></td>
+                    <td class="center-content">
+                        <button onclick="alertMessage()">Change password</button>
+                        <button onclick="alertMessage()">Delete</button>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+    {% else %}
+            <button class="button button1" onclick="alertMessage()">Change password</button>
+            <button class="button button3" onclick="alertMessage()">Delete account</button>
+    {% endif %}
 {% endblock %}

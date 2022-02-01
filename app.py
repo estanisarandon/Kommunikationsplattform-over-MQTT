@@ -41,6 +41,10 @@ def create_app():
     from blueprints.user import bp_user
     app.register_blueprint(bp_user)
 
+    # Register the admin blueprint with the app object
+    # from blueprints.admin import bp_admin
+    # app.register_blueprint(bp_admin)
+
     # Register the api blueprint with the app object
     # url_prefix can be used to access a specific version of the API
     from blueprints.api import bp_api
