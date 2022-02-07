@@ -51,6 +51,7 @@ def signup_post():
     name = request.form['name']
     email = request.form.get('email')
     password = request.form['password']
+    public_key = request.form['public_key']
     hashed_password = argon2.using(rounds=10).hash(password)
 
     # Check if user with this password exists in the database
@@ -60,7 +61,7 @@ def signup_post():
         flash("Email address is already in use")
         return redirect(url_for('bp_open.signup_get'))
 
-    new_user = User(name=name, email=email, password=hashed_password)
+    new_user = User(name=name, email=email, password=hashed_password, public_key=public_key)
 
     from app import db
     db.session.add(new_user)
