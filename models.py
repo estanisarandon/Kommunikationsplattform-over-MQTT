@@ -17,7 +17,6 @@ class User(db.Model):
     sent_messages = db.relationship('Message', backref='sender', lazy=True)
     recv_messages = db.relationship('Message', secondary=message_recv, lazy='subquery',
                                     backref=db.backref('receivers', lazy=True))
-    public_key = db.Column(db.TEXT(100))
 
     def is_active(self):
         return True
