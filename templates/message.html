@@ -4,9 +4,109 @@
     <h1>Sending a message to {{ receiver.name }}</h1>
     <form action="{{ url_for('bp_user.message_post') }}" method="POST">
         <input type="hidden" name="user_id" value="{{ receiver.id }}">
-        <textarea name="body" rows="10" cols="50" placeholder="Write your message here"></textarea> <br />
+        <input id ="publicKey" value="{{ receiver.public_key }}"></input>
+        <p>{{ receiver.name }}</p>
+        <textarea id="plain" name="body" rows="10" cols="50" placeholder="Write your message here"></textarea> <br />
         <br />
         <button class="sbutton button2" action="{{ url_for('bp_open.index')}}">Back</button>
         <button class="sbutton button1">Send</button>
     </form>
+
+    <br />
+    <p>SPACE</p>
+    <br />
+
+    <br />
+    <button onclick="encrypt(), rsaEncrypt()">Rsa Encrypt</button>
+
+    <br /> <br />
+    <p>Upload private key</p>
+    <input type="file" id="priv-file" enctype="multipart/form-data" />
+    <button onclick="readPrivateKey()">Read Private Key</button><span id="priv-loaded"></span>
+    <br /> <br />
+    <button onclick="rsaDecrypt()">Decrypt the Message</button>
+    <p id="decrypted"></p>
+
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <button onclick="decrypt()">Decrypt Message</button>
+    <input id="clear" placeholder="Decrypted message" />
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.min.js"></script>
+    <script src="/static/scripts/rsa.js"></script>
+    <script>
+        let aes_key;
+        let aes_encrypted;
+        let privateKey;
+        let rsa_encrypted;
+
+        generateAesKey()
+
+        function generateAesKey() {
+            aes_key = CryptoJS.lib.WordArray.random(16).toString();
+        }
+
+        function encrypt() {
+            let message = document.getElementById("plain").value;
+            aes_encrypted = CryptoJS.AES.encrypt(message, aes_key);
+            console.log(aes_encrypted)
+        }
+
+
+
+        let publicKey = document.getElementById("publicKey").value;
+
+        function rsaEncrypt() {
+
+            let aes_encrypted_message = aes_encrypted;
+            let rsaEncrypt = new JSEncrypt();
+            // Set the public key we want to use for encryption
+            rsaEncrypt.setPublicKey(publicKey);
+            // Encrypt the message
+            rsa_encrypted = rsaEncrypt.encrypt(aes_encrypted_message);
+            // Show the encrypted message on the page
+            console.log(rsa_encrypted)
+        }
+
+
+        function readPrivateKey() {
+            let files = document.getElementById("priv-file").files;
+            let file = files[0];
+            let reader = new FileReader();
+
+            reader.onloadend = function (event) {
+                privateKey = event.target.result;
+                privateKey = privateKey.replace(/(\r\n|\n|\r)/gm, "");
+                document.getElementById("priv-loaded").innerHTML = "Private key loaded";
+            };
+
+            reader.readAsText(file);
+        }
+
+        function rsaDecrypt() {
+            // Get the encrypted message
+            let cipher = rsa_encrypted;
+            // Create a RSA object
+            let rsaEncrypt = new JSEncrypt();
+            // Set the private key we want to use for decryption
+            rsaEncrypt.setPrivateKey(privateKey);
+            // Decrypt the message
+            let plainText = rsaEncrypt.decrypt(cipher);
+            // Show the decryted message
+            console.log(plainText)
+        }
+
+
+
+
+        <!--For later use when we need to decrypt the aes message-->
+        function decrypt() {
+            let clearText = CryptoJS.AES.decrypt(aes_encrypted, aes_key);
+            document.getElementById("clear").value = clearText.toString(CryptoJS.enc.Utf8);
+        }
+
+    </script>
 {% endblock %}
