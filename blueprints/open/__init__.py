@@ -3,9 +3,7 @@ from flask_login import login_user
 from passlib.hash import argon2
 from models import User
 
-
-
-# Create a blueprint object that can vbe used as an app object for this blueprint
+# Create a blueprint object that can be used as an app object for this blueprint
 bp_open = Blueprint('bp_open', __name__)
 
 
@@ -54,7 +52,7 @@ def signup_post():
     hashed_password = argon2.using(rounds=10).hash(password)
 
     # Check if user with this password exists in the database
-    user = User.query.filter_by(email=email).first() # First will five us an object if user exist, or None if not
+    user = User.query.filter_by(email=email).first()  # First will five us an object if user exist, or None if not
     if user:
         # If user is not none, then a user with this email exists in the database
         flash("Email address is already in use")

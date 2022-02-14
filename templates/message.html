@@ -2,11 +2,96 @@
 
 {% block content %}
     <h1>Sending a message to {{ receiver.name }}</h1>
-    <form action="{{ url_for('bp_user.message_post') }}" method="POST">
-        <input type="hidden" name="user_id" value="{{ receiver.id }}">
-        <textarea name="body" rows="10" cols="50" placeholder="Write your message here"></textarea> <br />
+
+        <input id="receiver_id" type="hidden" name="receiver_id" value="{{ receiver.id }}">
+        <p>Upload public key</p>
+        <input type="file" id="pub-file" enctype="multipart/form-data" />
+        <button onclick="readPublicKey()">Read Public Key</button><span id="pub-loaded"></span>
         <br />
-        <button class="sbutton button2" action="{{ url_for('bp_open.index')}}">Back</button>
-        <button class="sbutton button1">Send</button>
-    </form>
+        <br />
+        <textarea id="plain" rows="10" cols="50" placeholder="Write your message here"></textarea> <br />
+        <br />
+        <button class="sbutton button2" onclick="location.href='{{ url_for('bp_user.mailbox_get') }}'">Back</button>
+        <button class="sbutton button1" onclick="encrypt()">Send</button> <!-- Kolla hur onclick metoden funkar - vad ska returneras? -->
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.min.js"></script>
+    <script src="{{  url_for('static', filename='js/rsa.js') }}"></script>
+
+
+    <script>
+        let publicKey;
+
+
+        function readPublicKey() {
+            // Get the public file chooser files
+            let files = document.getElementById("pub-file").files;
+            // and exctract the first file, the one we want
+            let file = files[0];
+            // Create a file reader object
+            let reader = new FileReader();
+            // When the file is read, this function will be called
+            reader.onloadend = function (event) {
+                // Get the file contents
+                publicKey = event.target.result;
+                // Remove all new lines in the key
+                publicKey = publicKey.replace(/(\r\n|\n|\r)/gm, "");
+                // Notify the user that the file has been read
+                document.getElementById("pub-loaded").innerHTML = "Public key loaded";
+            };
+            // Read the file
+            reader.readAsText(file);
+        }
+
+        function encrypt() {
+            if (publicKey!=null){
+                let message = document.getElementById("plain").value;
+                // Convert message into a JSON string
+                let msgJson = JSON.stringify(message);
+                // Generate aesKey
+                let aesKey = CryptoJS.lib.WordArray.random(16).toString();
+                // Get the message to encrypt by aes
+                let cipher = CryptoJS.AES.encrypt(message, aesKey);
+                // Create a RSA object
+                let rsaEncrypt = new JSEncrypt();
+                // Set the public key we want to use for encryption
+                rsaEncrypt.setPublicKey(publicKey);
+                // Encrypt AESKey
+                let encryptedAESKey = rsaEncrypt.encrypt(aesKey);
+                // Save receiver id
+                let receiver_id = document.getElementById("receiver_id").value;
+                // Encrypt message
+                console.log(cipher)
+                let msgObj = {
+                    encryptedMsg: cipher.toString(),
+                    encryptedKey: encryptedAESKey,
+                    receiverId: receiver_id
+                };
+                let jsonToSend = JSON.stringify(msgObj);
+
+                fetch("http://127.0.0.1:5000/message", {
+                    method: 'POST',
+                    headers: {
+                        'Content-type': 'application/json; charset=UTF-8'
+                    },
+                    body: jsonToSend,
+                    }).then(function(response) {
+                        if (response.ok) {
+                            location.href='{{ url_for('bp_user.mailbox_get') }}';
+                            return "OK";
+                        }
+                        return Promise.reject(response);
+                    }).then(function (data) {
+                        console.log(data);
+                    }).catch(function (error) {
+                        console.warn('Something went wrong.', error);
+                    });
+            }else {
+                alert("Public key is missing!");
+            }
+        }
+
+    </script>
+
 {% endblock %}
+

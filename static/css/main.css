@@ -1,8 +1,10 @@
+@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css");
+
  body {
-            background-color: white;
-            text-align: center;
-            font-family: Arial, Helvetica, sans-serif;
-            }
+       background-color: white;
+       text-align: center;
+       font-family: Arial, Helvetica, sans-serif;
+       }
 
         .menu-item {
             margin: 5px;
@@ -28,7 +30,7 @@
 .bottom {
    position: absolute;
    bottom: 20px;
-   margin-left: 350px;
+   margin-left: 300px;
 }
 
  table{
@@ -61,6 +63,25 @@
 
 .offline {
     background: crimson;
+}
+
+.sup {
+    position: relative;
+    bottom: 1ex;
+    font-size: 80%;
+    color: black;
+}
+
+.no-new-msg {
+    color: black;
+}
+
+.new-msg {
+    color: #4CAF50;
+}
+
+#message-symbol {
+    font-size: 1em;
 }
 
 .button {

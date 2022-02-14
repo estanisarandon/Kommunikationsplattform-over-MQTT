@@ -18,8 +18,7 @@
     <br />
     <br />
     <br />
-    {% if current_user.admin %}
-        </table>
+    {% if current_user.admin == 1 %}
         <table class="center">
             <tr>
                 <th>Name</th>
@@ -28,14 +27,16 @@
                 <tr>
                     <td><a>{{ user.name }}</a></td>
                     <td class="center-content">
-                        <button onclick="alertMessage()">Change password</button>
-                        <button onclick="alertMessage()">Delete</button>
+                        <button onclick="location.href='{{ url_for('bp_admin.change_password_get', user_id=user.id) }}'">Change password</button>
+                        <form action="{{ url_for('bp_admin.delete_user', user_id=user.id) }}" method="POST">
+                            <input type="submit" value="Delete" />
+                        </form>
                     </td>
                 </tr>
             {% endfor %}
         </table>
     {% else %}
-            <button class="button button1" onclick="alertMessage()">Change password</button>
-            <button class="button button3" onclick="alertMessage()">Delete account</button>
+            <button class="button button3" onclick="alertMessage()">Update your email</button>
+            <button class="button button3" onclick="alertMessage()">Update your name</button>
     {% endif %}
 {% endblock %}

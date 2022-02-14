@@ -1,3 +1,5 @@
+import json
+
 from flask import Blueprint, render_template, redirect, url_for, request
 from flask_login import logout_user, login_required, current_user
 from controllers.message_controller import create_message, get_user_messages
@@ -18,7 +20,6 @@ def user_get():
 def logout_get():
     user = current_user
     user.online = False
-
     from app import db
     db.session.commit()
     logout_user()
@@ -34,10 +35,17 @@ def message_get(user_id):
 
 @bp_user.post('/message')
 def message_post():
-    body = request.form['body']
-    receiver_id = request.form['user_id']
-    create_message(body, receiver_id)
+    request_get_json = request.json
+    receiver_id = request_get_json.get('receiverId')
+    print(request_get_json)
+    create_message(json.dumps(request_get_json), receiver_id)
+    # returnera här - fuskbygge - typ {"url": <redirect target>}
     return redirect(url_for('bp_user.mailbox_get'))
+
+
+@bp_user.get('/mailbox/readMessage/<user_id>')
+def read_message_get(user_id):
+    return render_template('readMessage.html', sender=user_id)
 
 
 @bp_user.get('/mailbox')
@@ -45,11 +53,3 @@ def mailbox_get():
     messages = get_user_messages()
     users = get_all_but_current_users()
     return render_template('mailbox.html', messages=messages, users=users)
-
-
-@bp_user.get('/chat/<user_id>')
-def chat_get(user_id):
-    chat_server_ip = request.remote_addr
-    user_id = int(user_id)
-    chat_with = get_user_by_id(user_id)
-    render_template('chat.html', ip=chat_server_ip, chat_user=chat_with)

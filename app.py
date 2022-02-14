@@ -3,6 +3,7 @@ from flask import Flask
 from flask_login import LoginManager
 from flask_sqlalchemy import SQLAlchemy
 
+
 db = SQLAlchemy()
 
 # We will use a factory function to avoid cyclic imports
@@ -42,8 +43,12 @@ def create_app():
     app.register_blueprint(bp_user)
 
     # Register the admin blueprint with the app object
-    # from blueprints.admin import bp_admin
-    # app.register_blueprint(bp_admin)
+    from blueprints.admin import bp_admin
+    app.register_blueprint(bp_admin)
+
+    # Register the ajax blueprint with the app object
+    from blueprints.ajax import bp_ajax
+    app.register_blueprint(bp_ajax)
 
     # Register the api blueprint with the app object
     # url_prefix can be used to access a specific version of the API

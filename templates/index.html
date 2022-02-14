@@ -6,7 +6,7 @@
 
 {% block content %}
     <body>
-    <h1>Chat</h1>
+    <h1>Hello {{ current_user.name }}!</h1>
     <p>Communication platform</p>
     <br />
     <br />
@@ -28,4 +28,9 @@
         {% endif %}
     </div>
     </body>
+{% endblock %}
+
+{% block scripts %}
+
+
 {% endblock %}

@@ -16,6 +16,9 @@ INSERT INTO message (body, sender_id) VALUES
 
 SELECT * FROM message;
 
+ALTER TABLE message ADD read boolean;
+
+
 SELECT * FROM message_recv;
 
 CREATE TABLE message_recv(
