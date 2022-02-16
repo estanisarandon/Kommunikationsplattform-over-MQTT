@@ -15,17 +15,19 @@
             <th>Message</th>
         </tr>
         {% for message in messages %}
-            <tr>
-                <td><a href="{{ url_for('bp_user.message_get', user_id=message.sender.id) }}">{{ message.sender.name }}</a></td>
-                {% if message.sent_time is not none %}
-                    <td>{{ message.sent_time.year }}-{{ message.sent_time.month }}-{{ message.sent_time.day }}</td>
-                {% else %}
-                    <td>-</td>
-                {% endif %}
-                <td><form action="{{ url_for('bp_user.read_message_get', user_id=message.sender.id) }}" method="GET">
-                        <input type="submit" value="Read"/>
-                </form></td>
-            </tr>
+            {%  if message.sender.name != current_user.name %}
+                <tr>
+                    <td><a href="{{ url_for('bp_user.message_get', user_id=message.sender.id) }}">{{ message.sender.name }}</a></td>
+                    {% if message.sent_time is not none %}
+                        <td>{{ message.sent_time.year }}-{{ message.sent_time.month }}-{{ message.sent_time.day }}</td>
+                    {% else %}
+                        <td>-</td>
+                    {% endif %}
+                    <td><form action="{{ url_for('bp_user.read_message_get', message_id=message.id, user_id=message.sender.id) }}" method="GET">
+                        <input class="button2" type="submit" value="Read"/>
+                    </form></td>
+                </tr>
+            {% endif %}
         {% endfor %}
     </table>
     <table class="right">

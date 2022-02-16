@@ -4,7 +4,7 @@
     <h1>Sending a message to {{ receiver.name }}</h1>
 
         <input id="receiver_id" type="hidden" name="receiver_id" value="{{ receiver.id }}">
-        <p>Upload public key</p>
+        <p>Upload {{ receiver.name }} public key</p>
         <input type="file" id="pub-file" enctype="multipart/form-data" />
         <button onclick="readPublicKey()">Read Public Key</button><span id="pub-loaded"></span>
         <br />
@@ -94,4 +94,3 @@
     </script>
 
 {% endblock %}
-

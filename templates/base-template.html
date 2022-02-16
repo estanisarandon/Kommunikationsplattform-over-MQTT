@@ -25,7 +25,7 @@
     {% endblock %}
 
     <script>
-        setInterval(checkMessages, 5000000);
+        setInterval(checkMessages, 5000);
 
         function checkMessages() {
             fetch("http://127.0.0.1:5000/get_message_count")

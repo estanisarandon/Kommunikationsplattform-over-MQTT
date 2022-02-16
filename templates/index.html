@@ -6,8 +6,12 @@
 
 {% block content %}
     <body>
-    <h1>Hello {{ current_user.name }}!</h1>
-    <p>Communication platform</p>
+    {% if current_user.is_authenticated %}
+        <h1>Hello {{ current_user.name }}!</h1>
+    {% else %}
+        <h1>Hello stranger!</h1>
+    {% endif %}
+    <p>Welcome to your communication platform</p>
     <br />
     <br />
     <br />

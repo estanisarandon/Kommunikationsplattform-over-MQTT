@@ -2,7 +2,7 @@ import json
 
 from flask import Blueprint, render_template, redirect, url_for, request
 from flask_login import logout_user, login_required, current_user
-from controllers.message_controller import create_message, get_user_messages
+from controllers.message_controller import create_message, get_user_messages, get_body_and_key
 from controllers.user_controller import get_all_but_current_users, get_user_by_id
 
 
@@ -36,16 +36,21 @@ def message_get(user_id):
 @bp_user.post('/message')
 def message_post():
     request_get_json = request.json
+    body = request_get_json.get('encryptedMsg')
+    key_encrypted = request_get_json.get('encryptedKey')
     receiver_id = request_get_json.get('receiverId')
-    print(request_get_json)
-    create_message(json.dumps(request_get_json), receiver_id)
-    # returnera här - fuskbygge - typ {"url": <redirect target>}
+    create_message(body, key_encrypted, receiver_id)
     return redirect(url_for('bp_user.mailbox_get'))
 
 
-@bp_user.get('/mailbox/readMessage/<user_id>')
-def read_message_get(user_id):
-    return render_template('readMessage.html', sender=user_id)
+@bp_user.get('/mailbox/readMessage/<message_id>/<user_id>')
+def read_message_get(message_id, user_id):
+    body_and_key = get_body_and_key(message_id)
+    body = body_and_key[0]
+    key = body_and_key[1]
+    user_id = int(user_id)
+    sender = get_user_by_id(user_id)
+    return render_template('readMessage.html', sender=sender, body=body, key=key)
 
 
 @bp_user.get('/mailbox')

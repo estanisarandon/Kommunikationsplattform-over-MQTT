@@ -4,20 +4,19 @@
     <h1>Reading message from {{ sender.name }}</h1>
 
         <input type="hidden" name="user_id" value="{{ sender.id }}">
-        <p>Upload private key</p>
+        <input type="hidden" id="body" value="{{ body }}">
+        <input type="hidden" id="key" value="{{ key }}">
+        <p>Upload your private key</p>
         <input type="file" id="priv-file" enctype="multipart/form-data" />
         <button onclick="readPrivateKey()">Read Private Key</button><span id="priv-loaded"></span>
         <br />
         <br />
         <p>Message:</p>
-        <textarea id="message_decrypted" rows="10" cols="50" placeholder="Once decrypted, your message will show here"></textarea> <br />
+        <textarea id="message_decrypted" rows="10" cols="50" placeholder="Your decrypted message will show here"></textarea> <br />
         <br />
         <br />
         <button class="sbutton button2" onclick="location.href='{{ url_for('bp_user.mailbox_get') }}'">Back</button>
-        <button onclick="decrypt()">Decrypt</button>
-
-
-        </buttonform>
+        <button class="sbutton button1" onclick="decrypt()">Decrypt</button>
 
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.min.js"></script>
@@ -25,6 +24,8 @@
 
     <script>
         let privateKey;
+        let encrypted = document.getElementById("body").value;
+        let key = document.getElementById("key").value;
 
         function readPrivateKey() {
             let files = document.getElementById("priv-file").files;
@@ -39,25 +40,17 @@
         }
 
         function decrypt() {
-            // Get the encrypted message
-
-
-            let cipher = document.getElementById("encrypted").innerHTML;
             // Create a RSA object
             let rsaEncrypt = new JSEncrypt();
             // Set the private key we want to use for decryption
             rsaEncrypt.setPrivateKey(privateKey);
-            // Decrypt the message
-            let plainText = rsaEncrypt.decrypt(cipher);
-            // Show the decryted message
-            document.getElementById("decrypted").innerHTML = plainText;
+            // Decrypt AESKey
+            let AESkey = rsaEncrypt.decrypt(key);
+            // Decrypt message
+            let clearText = CryptoJS.AES.decrypt(encrypted, AESkey);
+            // Show the decrypted message
+            document.getElementById("message_decrypted").value = clearText.toString(CryptoJS.enc.Utf8)
         }
-
-        function aesDecrypt() {
-            let clearText = CryptoJS.AES.decrypt(encrypted, key);
-            document.getElementById("clear").value = clearText.toString(CryptoJS.enc.Utf8);
-        }
-
     </script>
 
 {% endblock %}

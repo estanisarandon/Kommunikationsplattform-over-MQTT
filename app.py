@@ -3,8 +3,8 @@ from flask import Flask
 from flask_login import LoginManager
 from flask_sqlalchemy import SQLAlchemy
 
-
 db = SQLAlchemy()
+
 
 # We will use a factory function to avoid cyclic imports
 def create_app():
@@ -50,12 +50,8 @@ def create_app():
     from blueprints.ajax import bp_ajax
     app.register_blueprint(bp_ajax)
 
-    # Register the api blueprint with the app object
-    # url_prefix can be used to access a specific version of the API
-    from blueprints.api import bp_api
-    app.register_blueprint(bp_api, url_prefix='/api/v1.0')
-
     return app
+
 
 if __name__ == '__main__':
     dotenv.load_dotenv()

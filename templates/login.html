@@ -13,7 +13,7 @@
     {% with messages = get_flashed_messages() %}
         {% if messages %}
             <div class="notification">
-                {{ messages [0] }}. Go to <a href="{{ url_for('bp_open.signup_get') }}">Signup page</a>
+                {{ messages [0] }}. Go to <a href="{{ url_for('bp_open.login_get') }}">login page</a>
             </div>
         {% endif %}
     {% endwith %}
