@@ -2,6 +2,8 @@ SELECT * FROM user;
 
 ALTER TABLE user ADD online BOOLEAN;
 
+delete from user where id = 7;
+
 
 CREATE TABLE message (
     id INTEGER PRIMARY KEY AUTOINCREMENT,

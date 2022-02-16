@@ -58,6 +58,16 @@ def signup_post():
         flash("Email address is already in use")
         return redirect(url_for('bp_open.signup_get'))
 
+    if not email:
+        # If the email is empty
+        flash("Please enter an email")
+        return redirect(url_for('bp_open.signup_get'))
+
+    if not password:
+        # If the password is empty
+        flash("Please enter a password")
+        return redirect(url_for('bp_open.signup_get'))
+
     new_user = User(name=name, email=email, password=hashed_password)
 
     from app import db

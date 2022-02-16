@@ -11,9 +11,13 @@
     <br />
     <br />
     {% with messages = get_flashed_messages() %}
-        {% if messages %}
+        {% if messages == 'Email address is already in use' %}
             <div class="notification">
                 {{ messages [0] }}. Go to <a href="{{ url_for('bp_open.login_get') }}">login page</a>
+            </div>
+        {% else %}
+            <div class="notification">
+                {{ messages [0] }}.
             </div>
         {% endif %}
     {% endwith %}
