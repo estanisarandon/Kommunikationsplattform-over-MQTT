@@ -21,14 +21,17 @@
             </div>
         {% endif %}
     {% endwith %}
+
     <form action="{{ url_for('bp_open.signup_post')}}" method="POST">
         <input type="text" name="name" placeholder="Enter your full name" /> <br />
         <input type="email" name="email" placeholder="Enter your email address" /> <br />
         <input type="password" name="password" placeholder="Enter your password" /> <br />
          <br />
-        <button class="sbutton button2" action="{{ url_for('bp_open.index')}}">Back</button>
-        <button class="sbutton button1">Sign In</button>
+        <button class="sbutton button1" type="submit">Sign In</button>
+    </form>
 
+    <form action="{{ url_for('bp_open.index')}}" method="GET">
+        <button class="sbutton button2">Back</button>
     </form>
 
 {% endblock %}
