@@ -1,5 +1,9 @@
 {% extends "base-template.html" %}
 
+{% block title %}
+    Login
+{% endblock %}
+
 {% block content %}
     <br />
     <br />
@@ -18,10 +22,14 @@
         {% endif %}
     {% endwith %}
     <form action="{{ url_for('bp_open.login_post')}}" method="POST">
-        <input type="email" name="email" placeholder="Enter your email address" /> <br />
-        <input type="password" name="password" placeholder="Enter your password" /> <br />
+        <input class="signupLogin" type="email" name="email" placeholder="Enter your email address" /> <br />
+        <input class="signupLogin" type="password" name="password" placeholder="Enter your password" /> <br />
         <br />
-        <button class="sbutton button2" action="{{ url_for('bp_open.index') }}">Back</button>
         <button class="sbutton button1">Log In</button>
     </form>
+
+    <form action="{{ url_for('bp_open.index')}}" method="GET">
+        <button class="sbutton button2">Back</button>
+    </form>
+
 {% endblock %}
