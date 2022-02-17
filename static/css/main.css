@@ -4,15 +4,27 @@
        background-color: white;
        text-align: center;
        font-family: Arial, Helvetica, sans-serif;
+        margin: 0;
+
        }
 
         .menu-item {
             margin: 5px;
             color: black;
+            font-size: 25px;
         }
         .footer{
             text-align: center;
         }
+
+.menu {
+    padding: 20px;
+    background-color: lightgray;
+}
+
+hr {
+    margin: 0;
+}
 
 .center {
   margin-left: auto;
@@ -142,7 +154,7 @@
   color: white;
 }
 
-input {
+.signupLogin {
     border: 0;
     padding: 20px;
     margin-bottom: 2px;
@@ -150,5 +162,6 @@ input {
     background-color: lightgray;
     font-size: 20px;
 }
+
 
 

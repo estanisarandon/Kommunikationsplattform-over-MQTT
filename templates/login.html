@@ -22,8 +22,8 @@
         {% endif %}
     {% endwith %}
     <form action="{{ url_for('bp_open.login_post')}}" method="POST">
-        <input type="email" name="email" placeholder="Enter your email address" /> <br />
-        <input type="password" name="password" placeholder="Enter your password" /> <br />
+        <input class="signupLogin" type="email" name="email" placeholder="Enter your email address" /> <br />
+        <input class="signupLogin" type="password" name="password" placeholder="Enter your password" /> <br />
         <br />
         <button class="sbutton button1">Log In</button>
     </form>
