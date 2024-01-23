@@ -1,15 +1,3 @@
-# Grupp 9 - Estanislao Sarandón, Edvin Arnryd och Isaac Leanderz
-
-3 users were created:
-u: maria@gmail.com
-p: maria
-u: mila@gmail.com
-p: mila1234
-u: admin@admin
-p: admin1234
-
-**Public and private keys for mila and maria are located in the static/key folder**
-
 # Elevprojekt i Datakommunikation/Data- och IT-säkerhet
 
 Ni skall skapa ett projekt enligt följande kriterier:
@@ -31,3 +19,13 @@ Kontohantering, inloggning och säkerhet på plattformen skall uppfylla följand
 - Krypteringsnycklarna hanteras på ett standardiserat vis (keychain).
 - Två användare, som samtidigt är anslutna till siten, skall kunna inleda en chat som sker via sockets direkt mellan användarna och där alla meddelanden är krypterade.
 - Inga krav finns på utseende på siten eller andra applikationer, utan all bedömning kommer att ske på funktionalitet.
+
+
+**Public and private keys for mila and maria are located in the static/key folder**
+3 users were created:
+- u: maria@gmail.com
+- p: maria
+- u: mila@gmail.com
+- p: mila1234
+- u: admin@admin
+- p: admin1234
