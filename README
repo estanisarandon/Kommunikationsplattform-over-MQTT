@@ -18,8 +18,8 @@ Ni skall skapa ett projekt enligt följande kriterier:
 Kontohantering, inloggning och säkerhet på plattformen skall uppfylla följande krav:
 • Användare skall kunna skapa ett konto. Vi lagrar inte användarens lösenord i klartext
 • Inloggade användare skall ha en behörighetsnivå. Det skall finnas två nivåer, användare och administratör. 
-  Icke inloggade användare skall inte kunna komma åt information som är avsedd för inloggade användare. 
-  Inloggade användare skall inte kunna komma åt information som är avsedd för administratörer.
+• Icke inloggade användare skall inte kunna komma åt information som är avsedd för inloggade användare. 
+• Inloggade användare skall inte kunna komma åt information som är avsedd för administratörer.
 • Meddelanden som skickas mellan användare skall vara krypterade vid överföring från klient till server och från server till klient.
 • Om en mottagare av ett meddelande är online skall meddelandet omedelbart visas i användarens webbläsare.
 • Om användaren inte är online skall meddelandet lagras på servern, i krypterad form, till dess användaren loggar in.
