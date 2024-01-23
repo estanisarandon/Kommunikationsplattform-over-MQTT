@@ -10,13 +10,10 @@ p: admin1234
 
 **Public and private keys for mila and maria are located in the static/key folder**
 
-
 # Elevprojekt i Datakommunikation/Data- och IT-säkerhet
 
-
 Ni skall skapa ett projekt enligt följande kriterier:
-Ni skall utveckla en kommunikationsplattform. Vi denna plattform skall man skicka meddelanden till
-andra medlemmar som finns på plattformen.
+- Ni skall utveckla en kommunikationsplattform. Vi denna plattform skall man skicka meddelanden till andra medlemmar som finns på plattformen.
 
 Kontohantering, inloggning och säkerhet på plattformen skall uppfylla följande krav:
 • Användare skall kunna skapa ett konto. Vi lagrar inte användarens lösenord i klartext
@@ -28,10 +25,9 @@ Kontohantering, inloggning och säkerhet på plattformen skall uppfylla följand
 • Om användaren inte är online skall meddelandet lagras på servern, i krypterad form, till dess användaren loggar in.
 
 
-VG nivå
-Ett MQTT meddelande skickas till en broker (tillhandahålls under kursen) om att en användare har ett väntande meddelande.
-Detta skall kunna fångas upp av et fristående program som meddelar att det finns nya meddelanden på siten.
-Krypteringsnycklarna hanteras på ett standardiserat vis (keychain).
-Två användare, som samtidigt är anslutna till siten, skall kunna inleda en chat som sker via sockets direkt mellan användarna och där 
-alla meddelanden är krypterade.
-Inga krav finns på utseende på siten eller andra applikationer, utan all bedömning kommer att ske på funktionalitet.
+## VG nivå
+- Ett MQTT meddelande skickas till en broker (tillhandahålls under kursen) om att en användare har ett väntande meddelande.
+- Detta skall kunna fångas upp av et fristående program som meddelar att det finns nya meddelanden på siten.
+- Krypteringsnycklarna hanteras på ett standardiserat vis (keychain).
+- Två användare, som samtidigt är anslutna till siten, skall kunna inleda en chat som sker via sockets direkt mellan användarna och där alla meddelanden är krypterade.
+- Inga krav finns på utseende på siten eller andra applikationer, utan all bedömning kommer att ske på funktionalitet.
